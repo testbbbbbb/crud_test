@@ -5,7 +5,7 @@ function App() {
   const [form, setForm] = useState({ name: "", email: "", password: "", dob: "" });
   const [editingId, setEditingId] = useState(null);
 
-  const apiUrl = "http://localhost/API/user.php";
+  const apiUrl = "http://localhost/NewTest/API/user.php";
 
   const fetchUsers = async () => {
     const res = await fetch(apiUrl);
@@ -48,7 +48,7 @@ function App() {
     setForm({
       name: user.name,
       email: user.email,
-      password: "", // password not fetched
+      password: user.password,
       dob: user.dob,
     });
     setEditingId(user.id);
@@ -59,26 +59,47 @@ function App() {
   }, []);
 
   return (
-    <div style={{ padding: 20 }}>
-      <h2>{editingId ? "Edit User" : "Add User"}</h2>
-      <input name="name" placeholder="Name" value={form.name} onChange={handleChange} />
-      <input name="email" placeholder="Email" value={form.email} onChange={handleChange} />
-      <input name="password" placeholder="Password" type="password" value={form.password} onChange={handleChange} />
-      <input name="dob" type="date" value={form.dob} onChange={handleChange} />
-      <button onClick={editingId ? updateUser : addUser}>
-        {editingId ? "Update User" : "Add User"}
-      </button>
+    <div className="container my-5">
+      <div className="card shadow p-4">
+        <h2 className="mb-4 text-primary">{editingId ? "Edit User" : "Add User"}</h2>
 
-      <h3>User List</h3>
-      <ul>
-        {users.map((u) => (
-          <li key={u.id}>
-            {u.name} ({u.email}) - {u.dob}{" "}
-            <button onClick={() => editUser(u)}>Edit</button>{" "}
-            <button onClick={() => deleteUser(u.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+        <div className="row g-3">
+          <div className="col-md-6">
+            <input name="name" placeholder="Name" className="form-control" value={form.name} onChange={handleChange}/>
+          </div>
+          <div className="col-md-6">
+            <input name="email" placeholder="Email" className="form-control" value={form.email} onChange={handleChange} />
+          </div>
+          <div className="col-md-6">
+            <input name="password" placeholder="Password" type="password" className="form-control" value={form.password} onChange={handleChange} />
+          </div>
+          <div className="col-md-6">
+            <input name="dob" type="date" className="form-control" value={form.dob} onChange={handleChange} />
+          </div>
+          <div className="col-12">
+            <button className={`btn ${editingId ? "btn-warning" : "btn-primary"}`} onClick={editingId ? updateUser : addUser} >
+              {editingId ? "Update User" : "Add User"}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-5">
+        <h3 className="text-secondary mb-3">User List</h3>
+        <ul className="list-group">
+          {users.map((u) => (
+            <li key={u.id} className="list-group-item d-flex justify-content-between align-items-center">
+              <div>
+                <strong>{u.name}</strong> ({u.email}) - {u.dob}
+              </div>
+              <div>
+                <button className="btn btn-sm btn-info me-2" onClick={() => editUser(u)}>Edit</button>
+                <button className="btn btn-sm btn-danger" onClick={() => deleteUser(u.id)}>Delete</button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
