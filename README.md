@@ -1,4 +1,4 @@
-# GOQii Full Stack User CRUD App
+# User CRUD App Test
 
 A simple full-stack application demonstrating my backend and frontend development skills using:
 
@@ -29,4 +29,31 @@ A simple full-stack application demonstrating my backend and frontend developmen
 ---
 
 ## 📂 Project Structure
+├── api/
+│ ├── db.php
+│ └── user.php
+│ └── crud_test.sql
+├── react-app/
+│ ├── public/
+│ ├── src/
+│ │ └── App.js
+│ └── package.json
+└── README.md
 
+
+---
+
+## 🛠️ Setup Instructions
+- git clone https://github.com/testbbbbbb/crud_test.git
+- cd crud_test (for react ui file changes)
+- cd API (for api code)
+
+- DB setup
+- Import SQL file to phpMyAdmin with the database name '#crud_test'
+
+  
+---
+
+## Requreements
+- SQL file
+- xammp/wammp server to run api
